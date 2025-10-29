@@ -1,0 +1,38 @@
+create 3 instances--->ansible-controller,node-1,node-2
+connect 3 insatnces
+set hostname for 3 instances 
+on controller
+
+yum install ansible-core
+cd /etc/
+mkdir ansible/
+cd ansible/
+vim ansible.cfg (copy and paste from git)
+vim hosts
+      ip and name of other two instances       to get ip--> ip a s on other two servers
+ping 2 other servers using their name(ping node-one.example.com)
+create ssh key
+and paste it on target machines
+
+cd /etc/ansible/
+
+vim users.yaml
+
+---
+- name: create multiple users
+  hosts: all
+  tasks:
+    - name: create multiple users
+      user:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - sanjaya
+        - drcula
+        - iraonman
+
+
+ansible-playbook users.yaml
+
+on target
+tail /etc/passwd/
