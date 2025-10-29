@@ -1,0 +1,69 @@
+create an instance
+create an iam user and attach administrator access
+
+connect instance
+set hostname
+on google install terraform
+copy the 3 cmds and paste on terminal
+mkdir /terra-code
+aws configure
+
+vim provider.tf
+
+
+
+
+# ----- Provider -----
+provider "aws" {
+  region = "us-east-1"
+}
+
+# ----- Security Group -----
+resource "aws_security_group" "web_access" {
+  name        = "web_access"
+  description = "Allow SSH and HTTP inbound traffic"
+  vpc_id      = "default" # Default VPC will be used
+
+  ingress {
+    description = "Allow SSH"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "Allow HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+# ----- EC2 Instance -----
+resource "aws_instance" "web_server" {
+  ami           = "ami-0c02fb55956c7d316" # Amazon Linux 2 us-east-1
+  instance_type = "t2.micro"
+
+  vpc_security_group_ids = [aws_security_group.web_access.id]
+
+  tags = {
+    Name = "Terraform-Web-Server"
+  }
+}
+
+
+
+terraform init
+terraform fmt
+terraform validate
+terraform apply
+ and check on aws
