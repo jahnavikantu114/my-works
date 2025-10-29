@@ -3,8 +3,9 @@ create an iam user and attach administrator access
 
 connect instance
 set hostname
-on google install terraform
-copy the 3 cmds and paste on terminal
+sudo yum install -y yum-utils shadow-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+sudo yum install terraform
 mkdir /terra-code
 aws configure
 
