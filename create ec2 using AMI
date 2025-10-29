@@ -1,0 +1,19 @@
+create an instance
+set hostname 
+bash
+yum install httpd
+systemctl start httpd
+systemctl enable httpd
+cd /var/www/html
+echo "this is ankitha" >index.html
+cat index.html
+public ip copy and paste in browser
+on aws --->select ec2 instance-->goto actions-image and templates-create image
+give image name and create 
+go to AMIS left side let the image be created wait for 5 mins
+AMIS -select the ami and go to actions-copy AMI -select destinatiuon as ohio-copy AMI
+goto ohio take duplicate session
+goto amis-wait for sometime until ami gets created---
+launch instance from ami
+give credentials to create an instance
+copy public id and paste in browser the same prompt will be available
