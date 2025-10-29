@@ -1,12 +1,15 @@
 create an ec2 instance 
+create an iam user and attach administrator access
 
+connect instance
+set hostname
+sudo yum install -y yum-utils shadow-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+sudo yum install terraform
+mkdir /terra-code
+aws configure
 
-
-
-
-
-
-
+vim provider.tf
 
 //////////////////////////////////////////////////////////////////////////////
 provider "aws" {
@@ -161,3 +164,12 @@ resource "aws_route_table_association" "private-asso" {
   subnet_id      = aws_subnet.private-subnet.id
   route_table_id = aws_route_table.private-rt.id
 }
+
+
+
+
+terraform init
+terraform fmt
+terraform validate
+terraform apply
+on aws we will get the vpc.
